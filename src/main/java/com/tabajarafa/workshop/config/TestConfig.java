@@ -11,6 +11,7 @@ import org.springframework.context.annotation.Profile;
 import com.tabajarafa.workshop.entities.Category;
 import com.tabajarafa.workshop.entities.Order;
 import com.tabajarafa.workshop.entities.OrderItem;
+import com.tabajarafa.workshop.entities.Payment;
 import com.tabajarafa.workshop.entities.Product;
 import com.tabajarafa.workshop.entities.User;
 import com.tabajarafa.workshop.entities.enums.OrderStatus;
@@ -79,6 +80,11 @@ public class TestConfig implements CommandLineRunner{
 		OrderItem oi3 = new OrderItem(o2, p3, 2, p3.getPrice());
 		OrderItem oi4 = new OrderItem(o3, p5, 2, p5.getPrice());
 		
-		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));		
+		orderItemRepository.saveAll(Arrays.asList(oi1, oi2, oi3, oi4));	
+		
+		Payment pay1 = new Payment(null, Instant.parse("2021-04-20T21:53:07Z"), o1);
+		o1.setPayment(pay1);
+		
+		orderRepository.save(o1);
 	}
 }
